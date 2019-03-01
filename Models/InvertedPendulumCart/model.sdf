@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='InvertedPendulumCart'>
-    <link name='link_0'>
+    <link name='Chassis'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -99,7 +99,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1'>
+    <link name='WheelRightBack'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -199,7 +199,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1_clone'>
+    <link name='WheelLeftBack'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -299,7 +299,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1_clone_0'>
+    <link name='WheelRightFront'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -399,7 +399,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1_clone_1'>
+    <link name='WheelLeftFront'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -499,7 +499,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_2'>
+    <link name='PendulumArm'>
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -600,8 +600,8 @@
       </collision>
     </link>
     <joint name='WheelRightBackRevolute' type='revolute'>
-      <parent>link_0</parent>
-      <child>link_1</child>
+      <parent>Chassis</parent>
+      <child>WheelRightBack</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 0 -1</xyz>
@@ -633,8 +633,8 @@
       </physics>
     </joint>
     <joint name='WheelLeftBackRevolute' type='revolute'>
-      <parent>link_0</parent>
-      <child>link_1_clone</child>
+      <parent>Chassis</parent>
+      <child>WheelLeftBack</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 0 -1</xyz>
@@ -666,8 +666,8 @@
       </physics>
     </joint>
     <joint name='WheelLeftFrontRevolute' type='revolute'>
-      <parent>link_0</parent>
-      <child>link_1_clone_1</child>
+      <parent>Chassis</parent>
+      <child>WheelLeftFront</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>1 0 0</xyz>
@@ -699,8 +699,8 @@
       </physics>
     </joint>
     <joint name='WheelRightFrontRevolute' type='revolute'>
-      <parent>link_0</parent>
-      <child>link_1_clone_0</child>
+      <parent>Chassis</parent>
+      <child>WheelRightFront</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>1 0 0</xyz>
@@ -731,9 +731,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='link_0_JOINT_4' type='revolute'>
-      <parent>link_0</parent>
-      <child>link_2</child>
+    <joint name='ChassisPendulumRevolute' type='revolute'>
+      <parent>Chassis</parent>
+      <child>PendulumArm</child>
       <pose frame=''>0 0 -0.25 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
