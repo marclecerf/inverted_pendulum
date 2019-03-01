@@ -12,3 +12,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 add_library(cart_plugin SHARED Source/cart_plugin.cc)
 target_link_libraries(cart_plugin ${GAZEBO_LIBRARIES})
 
+add_executable(test Source/test.cc)
+target_link_libraries(test ${GAZEBO_LIBRARIES})
+
