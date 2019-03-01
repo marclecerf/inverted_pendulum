@@ -9,19 +9,32 @@ int main(int _argc, char **_argv) {
   gazebo::transport::NodePtr node(new gazebo::transport::Node());
   node->Init();
   // Publish to the cart topic
-  gazebo::transport::PublisherPtr pub =
-    node->Advertise<gazebo::msgs::Vector3d>("~/cart/kp");
-  // Wait for a subscriber to connect to this publisher
-  pub->WaitForConnection();
-  // Create a a vector3 message
+  std::map<std::string, gazebo::transport::PublisherPtr> pm;
+  std::vector<std::string> topics = {
+      "~/cart/pendulum/pid",
+      "~/cart/wheel/pid",
+      "~/cart/wheel/tgt"
+  };
+  for (const auto& t: topics) {
+    pm[t] = node->Advertise<gazebo::msgs::Vector3d>(t);
+    // Wait for a subscriber to connect to this publisher
+    pm[t]->WaitForConnection();
+  }
+
   gazebo::msgs::Vector3d msg;
-  // Set the velocity in the x-component
   gazebo::msgs::Set(&msg, ignition::math::Vector3d(
-              std::atof(_argv[1]),
               std::atof(_argv[2]),
-              std::atof(_argv[3])));
+              std::atof(_argv[3]),
+              std::atof(_argv[4])));
+
   // Send the message
-  pub->Publish(msg);
+  auto res = pm.find(_argv[1]);
+  if (res != pm.end()) {
+    res->second->Publish(msg);
+  } else {
+    std::cerr << "Could not find publisher named '" << _argv[1] << "'\n";
+  }
+
   // Make sure to shut everything down.
   gazebo::client::shutdown();
 }
