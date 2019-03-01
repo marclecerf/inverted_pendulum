@@ -1,0 +1,10 @@
+#!/bin/bash
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source /usr/local/share/gazebo/setup.sh
+export GAZEBO_MODEL_PATH=$ROOT_DIR/Models:$GAZEBO_MODEL_PATH
+export GAZEBO_RESOURCE_PATH=$ROOT_DIR/Worlds:$GAZEBO_RESOURCE_PATH
+export LD_LIBRARY_PATH=$ROOT_DIR/Build:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DYLD_LIBRARY_PATH
+
+gazebo inverted_pendulum_cart.world
+
