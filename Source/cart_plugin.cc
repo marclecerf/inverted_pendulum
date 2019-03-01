@@ -11,14 +11,14 @@ namespace gazebo {
 const char* kPendulumJoint = "InvertedPendulumCart::ChassisPendulumRevolute";
 
 const std::vector<const char*> kWheelJoints = {
- "InvertedPendulumCart::WheelRightBackRevolute",
- "InvertedPendulumCart::WheelLeftBackRevolute",
+ //"InvertedPendulumCart::WheelRightBackRevolute",
+ //"InvertedPendulumCart::WheelLeftBackRevolute",
  "InvertedPendulumCart::WheelRightFrontRevolute",
  "InvertedPendulumCart::WheelLeftFrontRevolute",
 };
 
-const char* kRightFrontJoint = kWheelJoints.at(2);
-const char* kLeftFrontJoint = kWheelJoints.at(3);
+const char* kRightFrontJoint = "InvertedPendulumCart::WheelRightFrontRevolute";
+const char* kLeftFrontJoint = "InvertedPendulumCart::WheelLeftFrontRevolute";
 
 class CartPlugin : public ModelPlugin {
  public:
@@ -59,9 +59,9 @@ class CartPlugin : public ModelPlugin {
       std::cerr << "Could not find joint '" << kRightFrontJoint << "'\n";
       return;
     }
-    this->model->GetJointController()->SetPositionTarget(
+    this->model->GetJointController()->SetVelocityTarget(
             left_joint->GetScopedName(), left);
-    this->model->GetJointController()->SetPositionTarget(
+    this->model->GetJointController()->SetVelocityTarget(
             right_joint->GetScopedName(), right);
   }
 
